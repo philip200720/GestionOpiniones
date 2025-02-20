@@ -1,0 +1,40 @@
+{
+  "name": "gestionopiniones",
+  "version": "1.0.0",
+  "description": "\"# GestionOpiniones\"",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon index.js",
+    "dev": "nodemon index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/philip200720/GestionOpiniones.git"
+  },
+  "keywords": [],
+  "author": "Philip Posadas",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/philip200720/GestionOpiniones/issues"
+  },
+  "homepage": "https://github.com/philip200720/GestionOpiniones#readme",
+  "dependencies": {
+    "adoptionsystem": "file:",
+    "argon2": "^0.41.1",
+    "cors": "^2.8.5",
+    "date-fns": "^4.1.0",
+    "dotenv": "^16.4.7",
+    "express": "^4.21.2",
+    "express-rate-limit": "^7.5.0",
+    "express-validator": "^7.2.1",
+    "helmet": "^8.0.0",
+    "jsonwebtoken": "^9.0.2",
+    "mongoose": "^8.9.5",
+    "morgan": "^1.10.0",
+    "multer": "^1.4.5-lts.1",
+    "nodemon": "^3.1.9",
+    "swagger-jsdoc": "^6.2.8",
+    "swagger-ui-express": "^5.0.1"
+  }
+}
