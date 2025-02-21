@@ -41,7 +41,7 @@ export const listValidator = [
 
 export const updateUserValidator = [
     validateJWT,
-    hasRoles("ADMIN_ROLE","CLIENT_ROLE"),
+    hasRoles("ADMIN_ROLE","USER_ROLE"),
     body("uid").optional().isMongoId().withMessage("Not a valid MongoDB ID"),
     validateFields,
     handleErrors
