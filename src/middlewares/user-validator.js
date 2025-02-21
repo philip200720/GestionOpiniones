@@ -1,5 +1,5 @@
-import { body } from "express-validator"
-import { emailExists, usernameExists } from "../helpers/db-validators.js"
+import { body, param } from "express-validator"
+import { emailExists, usernameExists, userExists, userIsDeleted } from "../helpers/db-validators.js"
 import { validateFields } from "./validate-fields.js"
 import { handleErrors } from "./handleErrors.js"
 import { validateJWT } from "./validate-jwt.js"
@@ -43,6 +43,39 @@ export const updateUserValidator = [
     validateJWT,
     hasRoles("ADMIN_ROLE","USER_ROLE"),
     body("uid").optional().isMongoId().withMessage("Not a valid MongoDB ID"),
+    validateFields,
+    handleErrors
+]
+
+export const getUserByIdValidator = [
+    validateJWT,
+    hasRoles("ADMIN_ROLE"),
+    param("uid").isMongoId().withMessage("Not a valid MongoDB ID"),
+    param("uid").custom(userExists),
+    validateFields,
+    handleErrors
+]
+
+export const deleteUserValidator = [
+    validateJWT,
+    param("uid").optional().isMongoId().withMessage("Not a valid MongoDB ID"),
+    param("uid").custom(userExists),
+    param("uid").custom(userIsDeleted),
+    validateFields,
+    handleErrors
+]
+
+export const updatePasswordValidator = [
+    validateJWT,
+    param("uid").isMongoId().withMessage("Not a valid MongoDB ID"),
+    param("uid").custom(userExists),
+    body("newPassword").isStrongPassword({
+        minLength: 8,
+        minLowercase:1,
+        minUppercase: 1,
+        minNumbers: 1,
+        minSymbols: 1
+    }).withMessage("Password must contain at least 8 characters. Uppercase, lowercase, number and symbol"),
     validateFields,
     handleErrors
 ]

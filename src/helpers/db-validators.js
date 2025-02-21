@@ -17,6 +17,13 @@ export const usernameExists = async (username = "") => {
 export const userExists = async (uid = "") => {
     const existe = await User.findById(uid)
     if(!existe){
-        throw new Error("A user with the given ID does not exist")
+        throw new Error("User with the given ID does not exist")
+    }
+}
+
+export const userIsDeleted = async (uid = "") => {
+    const user = await User.findById(uid)
+    if(user.status === false){
+        throw new Error("User with the given ID already deleted")
     }
 }

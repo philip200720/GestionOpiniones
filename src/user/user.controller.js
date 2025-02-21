@@ -19,6 +19,31 @@ export const getUsers = async (req, res) => {
     }
 }
 
+export const getUserById = async (req, res) => {
+    try {
+      const { uid } = req.params;
+      const user = await User.findById(uid)
+      if (!user) {
+        return res.status(404).json({
+          success: false,
+          message: "User not found"
+        });
+      }
+  
+      return res.status(200).json({
+        success: true,
+        user
+      });
+  
+    } catch (err) {
+      return res.status(500).json({
+        success: false,
+        message: "Error getting user",
+        error: err.message
+      })
+    }
+}
+
 export const updateUser = async (req, res) => {
     try{
         const { usuario } = req
@@ -28,9 +53,7 @@ export const updateUser = async (req, res) => {
         if(role === "ADMIN_ROLE"){
             if(data.uid){
                 const { uid } = data
-                console.log(uid)
                 const user = await User.findById(uid)
-                console.log(user.role)
                 if(user.role === "ADMIN_ROLE"){
                     return res.status(401).json({
                         success: false,
@@ -46,7 +69,6 @@ export const updateUser = async (req, res) => {
                 }
             }
             const uid = usuario._id
-            console.log(uid)
             const user = await User.findByIdAndUpdate(uid, data, { new: true})
             return res.status(200).json({
                 success: true,
@@ -84,6 +106,101 @@ export const updateUser = async (req, res) => {
         return res.status(500).json({
             success: false,
             message: "Error updating users",
+            error: err.message
+        })
+    }
+}
+
+export const deleteUser = async (req, res) => {
+    try{
+        const { usuario } = req
+        const { role } = usuario
+        const data = req.body
+
+        if(role === "ADMIN_ROLE"){
+            if(data.uid){
+                const { uid } = data
+                const user = await User.findById(uid)
+                if(user.role === "ADMIN_ROLE"){
+                    return res.status(401).json({
+                        success: false,
+                        message: "Unable to delete other admins"
+                    })
+                }else if(user.role === "USER_ROLE"){
+                    const user = await User.findByIdAndUpdate(uid, {status:false}, { new: true})
+                     return res.status(200).json({
+                        success: true,
+                        message: "User deleted successfully",
+                        user
+                    })
+                }
+            }
+            const user = await User.findByIdAndUpdate(usuario._id, {status:false}, { new: true})
+            return res.status(200).json({
+                success: true,
+                message: "User deleted successfully",
+                user
+            })
+        }else if(role === "USER_ROLE"){
+            if(data.uid){
+                return res.status(401).json({
+                    success: false,
+                    message: "Only admins are authorized to delete other users"
+                })
+            }
+            const user = await User.findByIdAndUpdate(usuario.uid, {status: false}, {new: true})
+
+            return res.status(200).json({
+                success: true,
+                message: "User deleted successfully",
+                user
+            })
+        }
+    }catch(err){
+        return res.status(500).json({
+            success: false,
+            message: "Error deleting users",
+            error: err.message
+        })
+    }
+}
+
+export const updatePassword = async (req, res) => {
+    try{
+        const { usuario } = req
+        const { uid } = usuario._id
+        const { newPassword, password } = req.body
+        const user = await User.findById(uid)
+        const matchOldAndNewPassword = await verify(user.password, newPassword)
+        const validPassword = await verify(user.password, password)
+        
+        if(!validPassword){
+            return res.status(400).json({
+                message: "Invalid credentials",
+                error: "Incorrect password"
+            })
+        }
+        
+        if(matchOldAndNewPassword){
+            return res.status(400).json({
+                success: false,
+                message: "New password cannot be the same as the previous one"
+            })
+        }
+
+        const encryptedPassword = await hash(newPassword)
+
+        await User.findByIdAndUpdate(uid, {password: encryptedPassword}, {new: true})
+
+        return res.status(200).json({
+            success: true,
+            message: "Password updated successfully",
+        })
+
+    }catch(err){
+        return res.status(500).json({
+            success: false,
+            message: "Error updating password",
             error: err.message
         })
     }
