@@ -1,6 +1,6 @@
 import { config } from "dotenv";
 import { initServer } from "./config/server";
 
-config
+config()
 initServer()
 
