@@ -1,6 +1,6 @@
 import { Router } from "express";
 import { listValidator, updateUserValidator } from "../middlewares/user-validator";
-import { getUsers } from "./user.controller";
+import { getUsers, updateUser } from "./user.controller";
 
 
 const router = Router()
