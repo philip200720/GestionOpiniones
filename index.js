@@ -1,6 +1,6 @@
 import { config } from "dotenv";
-import { initServer } from "./config/server";
+import { initServer } from "./config/server.js";
 
-config
+config()
 initServer()
 

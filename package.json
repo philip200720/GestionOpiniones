@@ -15,6 +15,7 @@
   "keywords": [],
   "author": "Philip Posadas",
   "license": "ISC",
+  "type": "module",
   "bugs": {
     "url": "https://github.com/philip200720/GestionOpiniones/issues"
   },
