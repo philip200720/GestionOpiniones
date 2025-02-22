@@ -1,4 +1,4 @@
-import { body, param } from "express-validator"
+8
 import { emailExists, usernameExists, userExists, userIsDeleted } from "../helpers/db-validators.js"
 import { validateFields } from "./validate-fields.js"
 import { handleErrors } from "./handleErrors.js"
