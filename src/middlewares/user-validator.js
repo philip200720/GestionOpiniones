@@ -58,17 +58,16 @@ export const getUserByIdValidator = [
 
 export const deleteUserValidator = [
     validateJWT,
-    param("uid").optional().isMongoId().withMessage("Not a valid MongoDB ID"),
-    param("uid").custom(userExists),
-    param("uid").custom(userIsDeleted),
+    body("uid").optional().isMongoId().withMessage("Not a valid MongoDB ID"),
+    body("uid").optional().custom(userExists).custom(userIsDeleted),
     validateFields,
     handleErrors
 ]
 
 export const updatePasswordValidator = [
     validateJWT,
-    param("uid").isMongoId().withMessage("Not a valid MongoDB ID"),
-    param("uid").custom(userExists),
+    body("uid").optional().isMongoId().withMessage("Not a valid MongoDB ID"),
+    body("uid").optional().custom(userExists),
     body("newPassword").isStrongPassword({
         minLength: 8,
         minLowercase:1,
