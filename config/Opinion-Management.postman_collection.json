@@ -1,0 +1,158 @@
+{
+	"info": {
+		"_postman_id": "a1813dca-4e99-46e6-a514-28a953eaee35",
+		"name": "Opinion-Management",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json",
+		"_exporter_id": "37589075"
+	},
+	"item": [
+		{
+			"name": "auth",
+			"item": [
+				{
+					"name": "login",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"username\": \"jim\",\r\n    \"password\": \"Abc4321.\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://127.0.0.1:3000/opinionManagement/v1/auth/login"
+					},
+					"response": []
+				},
+				{
+					"name": "register",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"Jim\",\r\n    \"surname\": \"Posadas\",\r\n    \"username\": \"jim\",\r\n    \"email\": \"jim@example.com\",\r\n    \"password\": \"Abc1234.\",\r\n    \"role\": \"ADMIN_ROLE\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://127.0.0.1:3000/opinionManagement/v1/auth/register"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "user",
+			"item": [
+				{
+					"name": "getUserById",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI2N2I4YjdlYzU5OTE0MmY1ZGNhMGJmNGQiLCJpYXQiOjE3NDAxNTg5NjksImV4cCI6MTc0MDE2MjU2OX0.kknZRupVe9ImlW85oFd8Z78uUK5rofjYkhPwj3fxvSs"
+							}
+						},
+						"method": "GET",
+						"header": [],
+						"url": "http://127.0.0.1:3000/opinionManagement/v1/user/findUser/67b8489c337a75970f82a678"
+					},
+					"response": []
+				},
+				{
+					"name": "listUser",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI2N2I4YjdlYzU5OTE0MmY1ZGNhMGJmNGQiLCJpYXQiOjE3NDAxNTg5NjksImV4cCI6MTc0MDE2MjU2OX0.kknZRupVe9ImlW85oFd8Z78uUK5rofjYkhPwj3fxvSs"
+							}
+						},
+						"method": "GET",
+						"header": [],
+						"url": "http://127.0.0.1:3000/opinionManagement/v1/user/"
+					},
+					"response": []
+				},
+				{
+					"name": "updateUser",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI2N2I4YjdlYzU5OTE0MmY1ZGNhMGJmNGQiLCJpYXQiOjE3NDAxNTg5NjksImV4cCI6MTc0MDE2MjU2OX0.kknZRupVe9ImlW85oFd8Z78uUK5rofjYkhPwj3fxvSs"
+							}
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"uid\": \"67b8489c337a75970f82a678\",\r\n    \"name\": \"Jim Andre\",\r\n    \"surname\": \"Posadas del Cid\",\r\n    \"username\": \"jim1\",\r\n    \"password\": \"Abc1234.\",\r\n    \"role\": \"ADMIN_ROLE\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://127.0.0.1:3000/opinionManagement/v1/user/updateUser"
+					},
+					"response": []
+				},
+				{
+					"name": "deleteUser",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI2N2I4YjdlYzU5OTE0MmY1ZGNhMGJmNGQiLCJpYXQiOjE3NDAxOTA5MTIsImV4cCI6MTc0MDE5NDUxMn0.7jVfXciLjlaPAMuGmxsyugIb5qjJnQ9KMpn5IyJwTDM"
+							}
+						},
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"uid\": \"67b8489c337a75970f82a678\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://127.0.0.1:3000/opinionManagement/v1/user/deleteUser"
+					},
+					"response": []
+				},
+				{
+					"name": "updatePassword",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI2N2I4YjdlYzU5OTE0MmY1ZGNhMGJmNGQiLCJpYXQiOjE3NDAxOTI4MTAsImV4cCI6MTc0MDE5NjQxMH0.kCWgKZo02J82AKpJ1BzoXOngt-0U-j5oQyxcwJr1LWY"
+							}
+						},
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"password\": \"Abc1234.\",\r\n    \"newPassword\": \"Abc4321.\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://127.0.0.1:3000/opinionManagement/v1/user/updatePassword"
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}

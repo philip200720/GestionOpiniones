@@ -4,6 +4,8 @@ import { validateFields } from "./validate-fields.js"
 import { handleErrors } from "./handleErrors.js"
 import { validateJWT } from "./validate-jwt.js"
 import { hasRoles } from "./validate-roles.js";
+import { body, param } from 'express-validator';
+
 
 export const registerValidator = [
     body("name").notEmpty().withMessage("Name is required"),
